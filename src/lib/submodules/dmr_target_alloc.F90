@@ -41,6 +41,7 @@ submodule (dmr) dmr_target_alloc
                fptr_dev(bounds(1):bounds(2)) => fptr
             else
                call c_f_pointer(cptr_dev, fptr_dev, [dimensions])
+               print *, 'dimensions ', dimensions
             endif
          endif
       endsubroutine omp_target_alloc_f_int8_1

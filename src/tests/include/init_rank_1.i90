@@ -15,6 +15,7 @@
          integer(I8P)                :: ii
 
 #if defined _OpenMP_5_1
+         print *, 'init started'
          !$omp target teams distribute parallel do device(omp_get_default_device()) has_device_addr(fptr_dev)
 #else
          !$omp target teams distribute parallel do device(omp_get_default_device()) is_device_ptr(fptr_dev)
@@ -23,3 +24,4 @@
             fptr_dev(ii) = const
          enddo
          !$omp end target teams distribute parallel do
+         print *, 'init ended'

@@ -38,6 +38,7 @@ submodule (dmr) dmr_target_init
 
          lbounds = lbound(array)
          ubounds = ubound(array)
+         print *, 'cazzoe ', lbounds, ubounds
 
          select rank(array)
          rank(1)

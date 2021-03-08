@@ -27,7 +27,7 @@ ifdef intel
    FCFLAGS  = $(LDFLAGS) -traceback -module $(DMOD) -what
    FORTFLAGS = -c -warn all -check all -traceback -check bounds -debug all -module $(DMOD)
    EXEFLAGS = -fiopenmp -fopenmp-targets=spir64 -g -warn all -check all -traceback -check bounds -debug all -module $(DMOD)
-   DFLAGS = -D_OpenMP_5_1
+   DFLAGS = -D_OpenMP_5_1 -D_F2008
 endif
 
 ifdef ibm
