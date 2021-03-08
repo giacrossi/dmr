@@ -139,10 +139,15 @@ program test_dmr
    call omp_target_alloc_f(fptr_dev=fptr_dev_int8, dimensions=i, omp_dev=omp_default)
    print *, 'Is the device pointer associated after omp_target_alloc_f? ', associated(fptr_dev_int8)
    print *, 'ISSUE'
-   call init_I(fptr_dev_int8, i)
+   !$omp target teams distribute parallel do has_device_addr(fptr_dev_int8)
+   do k=1,i
+      fptr_dev_int8(k) = 1_int8
+   enddo
+   !$omp end target teams distribute parallel do
+   !call init_I(fptr_dev_int8, i)
    print *, 'Device pointer initialization completed'
-   call matmul_I(fptr_dev_int8, i)
-   print *, 'Device pointer multiplication completed'
+   !call matmul_I(fptr_dev_int8, i)
+   !print *, 'Device pointer multiplication completed'
    allocate(fptr_hos_int8(i)); fptr_hos_int8 = 0_int8
    call omp_target_memcpy_f(fptr_hos_int8, fptr_dev_int8, ierr, 0_int32, 0_int32, &
                             omp_initial, omp_default)
